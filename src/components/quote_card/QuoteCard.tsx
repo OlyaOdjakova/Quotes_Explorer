@@ -1,28 +1,10 @@
 import { Button, Card, Center, Text } from "@chakra-ui/react";
 import { Quote } from "lucide-react";
-import { useEffect, useState } from "react";
-import { getRandomQuotes } from "../../quotesExplorer.api.ts";
-
-interface QuoteData {
-  author: string;
-  content: string;
-}
+import { getRandomQuote } from "../../quotesExplorer.api.ts";
+import { useQuery } from "@tanstack/react-query";
 
 const QuoteCard = () => {
-  const [quoteData, setQuoteData] = useState<QuoteData>();
-
-  const onGenerateNewQuote = async () => {
-    const data = await getRandomQuotes();
-    setQuoteData(data);
-  };
-
-  useEffect(() => {
-    const fetchRandomQuotes = async () => {
-      const data = await getRandomQuotes();
-      setQuoteData(data);
-    };
-    fetchRandomQuotes();
-  }, []);
+  const query = useQuery({ queryKey: ["quote"], queryFn: getRandomQuote });
 
   return (
     <Card.Root width="500px" variant="elevated" key="elevated" bg="#1F2127">
@@ -41,7 +23,7 @@ const QuoteCard = () => {
               mb={4}
               color="#EDEDED"
             >
-              {`"${quoteData?.content}"`}
+              {query.isLoading ? "Loading..." : `"${query.data?.content}"`}
             </Text>
             <Text
               fontSize="large"
@@ -50,7 +32,7 @@ const QuoteCard = () => {
               color="#CCCCCC"
               mt={3}
             >
-              - {quoteData?.author}
+              - {query.data?.author}
             </Text>
           </Card.Description>
         </Center>
@@ -61,7 +43,7 @@ const QuoteCard = () => {
           bg="#2F78CC"
           color="#FFFFFF"
           _hover={{ bg: "#1F5FAF" }}
-          onClick={onGenerateNewQuote}
+          onClick={() => query.refetch()}
         >
           Next Quote
         </Button>
