@@ -1,6 +1,6 @@
 # Quotes Explorer
 
-A responsive web application that displays random quotes
+A responsive web application that displays random quotes.
 
 **Tech Stack:**
 - TypeScript
@@ -9,4 +9,4 @@ A responsive web application that displays random quotes
 - React Query
 - lucide-react
 
-Deployed on vercel: 
+Deployed on vercel: https://quotes-explorer-byqt.vercel.app/
