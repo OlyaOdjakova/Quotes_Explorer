@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, Center } from "@chakra-ui/react";
+import { Button, Card, Center, Text } from "@chakra-ui/react";
 import { Quote } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getRandomQuotes } from "../../quotesExplorer.api.ts";
@@ -25,25 +25,45 @@ const QuoteCard = () => {
   }, []);
 
   return (
-    <Card.Root width="500px" variant="elevated" key="elevated">
+    <Card.Root width="500px" variant="elevated" key="elevated" bg="#1F2127">
       <Card.Body gap="2">
-        <Center>
-          <Avatar.Root size="lg" shape="rounded">
-            <Quote />
-          </Avatar.Root>
-        </Center>
-        <Center>
-          <Card.Title mb="2">Daily Quote</Card.Title>
-        </Center>
-        <Center>
+        <Center flexDirection="column">
+          <Quote color="#FFD966" />
+          <Card.Title mb="4" mt="6" color="#FFFFFF">
+            Daily Quote
+          </Card.Title>
           <Card.Description>
-            {quoteData?.content} - {quoteData?.author}
+            <Text
+              fontFamily="Georgia, serif"
+              fontSize="x-large"
+              fontStyle="italic"
+              textAlign="center"
+              mb={4}
+              color="#EDEDED"
+            >
+              {`"${quoteData?.content}"`}
+            </Text>
+            <Text
+              fontSize="large"
+              textAlign="center"
+              fontStyle="italic"
+              color="#CCCCCC"
+              mt={3}
+            >
+              - {quoteData?.author}
+            </Text>
           </Card.Description>
         </Center>
       </Card.Body>
       <Card.Footer justifyContent="center">
-        <Button variant="outline" onClick={onGenerateNewQuote}>
-          Generate New Quote
+        <Button
+          variant="solid"
+          bg="#2F78CC"
+          color="#FFFFFF"
+          _hover={{ bg: "#1F5FAF" }}
+          onClick={onGenerateNewQuote}
+        >
+          Next Quote
         </Button>
       </Card.Footer>
     </Card.Root>
