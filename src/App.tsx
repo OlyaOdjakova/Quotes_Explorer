@@ -1,11 +1,11 @@
 import "./App.css";
-import MainView from "./main_view/MainView.tsx";
-import { Provider } from "@/components/ui/provider";
+import { Provider } from "./components/ui/provider.tsx";
+import QuoteCard from "./components/quote_card/QuoteCard.tsx";
 
 function App() {
   return (
     <Provider>
-      <MainView />
+      <QuoteCard />
     </Provider>
   );
 }
